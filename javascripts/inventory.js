@@ -30,15 +30,15 @@ var inventory;
       return item;
     },
     update: function($item) {
-      var id = +$item[0].id,
+      var id = findId($item),
           item = this.getItem(id);
 
       item.name = $parent.find("[name='item-name']").val();
       item.stock_number = $parent.find("[name='stock-number']").val();
       item.quantity = +$parent.find("[name='quantity']").val();
     },
-    remove: function(item) {
-      var id = +item[0].id,
+    remove: function($item) {
+      var id = findId($item),
           newItems = this.items.filter(function(item) {
             return item.id !== id;
           });
@@ -58,6 +58,9 @@ var inventory;
       });
 
       return item;
+    },
+    findId: function($item) {
+      return +$item[0].id;
     },
     newItem: function() {
       var item = this.add(),
